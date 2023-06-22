@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+@import url('https://fonts.cdnfonts.com/css/cascadia-code');
+
+.title-box
+{
+    padding: 30px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-width: 2.5px;
+    border-style: dashed;
+    border-color: ghostwhite;
+    border-radius: 2px;
+}
+h1, h2{
+	margin: 0;
+	padding: 0;
+	border-color: transparent;
+}
+body{
+    background-color: #1A1919;
+}
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: "Lucida Console", "Courier New", monospace;
+    background-color: #1A1919;
+}
+@media screen and (min-width: 700px) {
+    header {
+	white-space: nowrap;
+	overflow: hidden;
+    text-align: center;
+    color: white;
+    font-size: xx-large;
+    font-family: "Lucida Console", "Courier New", monospace;
+    border-color: transparent;
+	}
+}
+@media screen and (max-width: 700px) {
+    header {
+	white-space: nowrap;
+	overflow: hidden;
+    text-align: center;
+    color: white;
+    font-size: medium;
+    font-family: "Lucida Console", "Courier New", monospace;
+    border-color: transparent;
+	}
+}
+
+nav {
+	display: block;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    font-size: large;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+nav ul li {
+    margin: 0 10px;
+    margin-top: 20px;
+}
+
+@media screen and (min-width: 700px) {
+    nav ul li a {
+    text-decoration: none;
+    color: ghostwhite;
+    opacity: 0;
+    font-size: larger;
+    animation: fade 4s forwards;
+    animation-delay: 3s;
+    }
+}
+@media screen and (max-width: 700px) {
+    nav ul li a {
+    text-decoration: none;
+    color: ghostwhite;
+    opacity: 0;
+    font-size: medium;
+    animation: fade 4s forwards;
+    animation-delay: 3s;
+    }
+}
+#name {
+	margin-bottom: 10px;
+}
+
+#profession {
+
+}
+
+#ship
+{
+    width: 100px;
+    height: 50px;
+    background-color: darkred;
+}
+
+.typed-out {
+  overflow: hidden;
+  border-right: .15em solid ghostwhite;
+  border-color: transparent;
+  width: 0;
+  animation: typing 1.5s steps(20, end) forwards, blink .8s infinite;
+}
+.typed-out2 {
+  overflow: hidden;
+  border-right: .15em solid ghostwhite;
+  border-color: transparent;
+  width: 0;
+  animation: typing 1.5s steps(20, end) forwards, blink .8s infinite;
+  animation-delay: 1.5s;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  from { border-color: transparent }
+  to { border-color: ghostwhite }
+}
+@keyframes fade {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}
+
