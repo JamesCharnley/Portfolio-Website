@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
 @import url('https://fonts.cdnfonts.com/css/cascadia-code');
 
-.title-box
+#title-box
 {
     padding: 30px 30px 30px 30px;
     display: flex;
@@ -21,6 +21,37 @@ h1, h2{
 body{
     background-color: #1A1919;
 }
+.start-button-container
+{
+    width: 300px;
+    height: 75px;
+    background-color: transparent;
+    border-style: solid;
+    border-color: ghostwhite;
+}
+#start-button
+{
+
+    width: 300px;
+    height: 80px;
+    margin-top: 40px;
+    font-size: 70px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    color: ghostwhite;
+    background-color: transparent;
+    border:  none;
+    border-top: solid;
+    border-bottom: solid;
+    border-color: ghostwhite;
+
+
+}
+#start-button:hover {
+      background-color: ghostwhite;
+      color: black;
+      opacity: 0.75;
+      transition: 0.7s;
+  }
 #main {
     display: flex;
     flex-direction: column;
@@ -104,13 +135,6 @@ nav ul li {
 
 }
 
-#ship
-{
-    width: 100px;
-    height: 50px;
-    background-color: darkred;
-}
-
 .typed-out {
   overflow: hidden;
   border-right: .15em solid ghostwhite;
@@ -140,4 +164,13 @@ nav ul li {
   0% { opacity: 0 }
   100% { opacity: 1 }
 }
-
+@keyframes transition-black
+{
+  from {background-color: #1A1919 }
+  to {background-color: black }
+}
+@keyframes transition-black-back
+{
+  from {background-color: black }
+  to {background-color: #1A1919 }
+}
