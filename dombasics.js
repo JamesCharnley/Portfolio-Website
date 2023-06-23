@@ -29,12 +29,16 @@ var speed = 2;
 var bulletSpeed = 1;
 var interval = null;
 var enemiesMoveInterval = null;
+var enemiesMoveIntervalValue = 300;
+var bulletMoveInterval = null;
+var shootInterval = null;
 var player = null;
 
 var bulletBuffer = [20];
 var enemies = [[12], [12], [12], [12], [12], [12]];
 var isShooting = false;
 var gameActive = false;
+var increaseSpeed = false;
 var enemySprites = ["SIB.png", "SIR.png", "SIG.png"];
 function StartGame()
 {
@@ -60,7 +64,8 @@ function StartGame()
    enemyMoveDirection = 1;
 
    interval = setInterval(Move, 1);
-   enemiesMoveInterval = setInterval(MoveEnemies, 300);
+   enemiesMoveInterval = setInterval(MoveEnemies, enemiesMoveIntervalValue);
+   bulletMoveInterval = setInterval(MoveBullets, 50);
    gameActive = true;
 
    startBtn.innerHTML = "Stop";
@@ -95,7 +100,8 @@ function StopGame()
    }
    clearInterval(interval);
    clearInterval(enemiesMoveInterval);
-
+   enemiesMoveIntervalValue = 300;
+   clearInterval(MoveBullets);
    var titleBox = document.getElementById("title-box");
    titleBox.style.opacity = 1;
 
@@ -214,7 +220,7 @@ document.addEventListener('keyup', function(event) {
    {
       if(isShooting == true)
       {
-         isShooting = false;
+         //isShooting = false;
       }
    }
 });
@@ -241,6 +247,11 @@ function Move()
       player.style.left = player.offsetLeft + speed * moveDirection + 'px';
    }
 
+   
+}
+
+function MoveBullets()
+{
    for(var x = 0; x < 20; x++)
    {
       if(bulletBuffer[x] != null)
@@ -305,6 +316,13 @@ function MoveEnemies()
          }
       }
    }
+   if(increaseSpeed == true)
+   {
+      increaseSpeed = false;
+      
+      clearInterval(enemiesMoveInterval);
+      enemiesMoveInterval = setInterval(MoveEnemies, enemiesMoveIntervalValue);
+   }
 }
 
 function MoveEnemiesDown()
@@ -329,6 +347,7 @@ function MoveEnemiesDown()
 
 function SpawnBullet()
 {
+   shootInterval = setInterval(UnlockShooting, 500);
    const para = document.createElement("img");
    para.setAttribute("src", "SIBullet.png");
    para.style.position = 'absolute';
@@ -350,6 +369,12 @@ function SpawnBullet()
          break;
       }
    }
+}
+
+function UnlockShooting()
+{
+   isShooting = false;
+   clearInterval(shootInterval);
 }
 
 function BulletCollisionCheck(_bulletIndex)
@@ -375,6 +400,8 @@ function BulletCollisionCheck(_bulletIndex)
                   bulletBuffer[_bulletIndex] = null;
                   enemies[x][y].remove();
                   enemies[x][y] = null;
+                  increaseSpeed = true;
+                  enemiesMoveIntervalValue = enemiesMoveIntervalValue - 4;
                }
             }
          }
