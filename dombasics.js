@@ -50,7 +50,10 @@ function OnLoad()
       playerWidth = playerWidth / 3;
       playerHeight = playerHeight / 3;
 
-     
+      bulletWidth = bulletWidth / 4;
+      bulletheight = bulletheight / 4;
+
+      screenStopBuffer = screenStopBuffer / 3;
 
       leftControlButton.style.bottom = '100px';
       leftControlButton.style.left = window.innerWidth - (touchControlWidth + touchControlSpacing) * 2 + 'px';
@@ -325,6 +328,7 @@ document.addEventListener('keyup', function(event) {
    }
 });
 
+var rightScreenStopBuffer = 20;
 function Move()
 {
    if(moveDirection != 0)
@@ -332,14 +336,14 @@ function Move()
       console.log("Moveing");
       if(moveDirection == 1)
       {
-         if(player.offsetLeft >= window.innerWidth - 120)
+         if(player.offsetLeft >= window.innerWidth - (playerWidth + screenStopBuffer))
          {
             return;
          }
       }
       if(moveDirection == -1)
       {
-         if(player.offsetLeft < 1)
+         if(player.offsetLeft < screenStopBuffer)
          {
             return;
          }
@@ -444,7 +448,8 @@ function MoveEnemiesDown()
       }
    }
 }
-
+var bulletWidth = 20;
+var bulletheight = 20;
 function SpawnBullet()
 {
    shootInterval = setInterval(UnlockShooting, 500);
@@ -459,12 +464,12 @@ function SpawnBullet()
          bulletBuffer[x] = para;
          bulletBuffer[x].style.bottom = '0px';
          bulletBuffer[x].style.left = '0px';
-         //bulletBuffer[x].style.height = '20px';
-         //bulletBuffer[x].style.width = '20px';
+         bulletBuffer[x].style.height = bulletheight + 'px';
+         bulletBuffer[x].style.width = bulletWidth + 'px';
          //bulletBuffer[x].style.backgroundColor = "#88FB45";
-         bulletBuffer[x].style.bottom = '50px';
+         bulletBuffer[x].style.bottom = playerHeight + 'px';
 
-         bulletBuffer[x].style.left = player.offsetLeft + 40 + 'px';
+         bulletBuffer[x].style.left = player.offsetLeft + playerWidth / 2 - bulletWidth / 2 + 'px';
 
          break;
       }
@@ -492,9 +497,9 @@ function BulletCollisionCheck(_bulletIndex)
       {
          if(enemies[x][y] != null && bulletBuffer[_bulletIndex] != null)
          {
-            if(window.innerHeight - bulletBuffer[_bulletIndex].offsetTop >= window.innerHeight - enemies[x][y].offsetTop && window.innerHeight - bulletBuffer[_bulletIndex].offsetTop <= window.innerHeight - enemies[x][y].offsetTop + 50)
+            if(window.innerHeight - bulletBuffer[_bulletIndex].offsetTop >= window.innerHeight - enemies[x][y].offsetTop && window.innerHeight - bulletBuffer[_bulletIndex].offsetTop <= window.innerHeight - enemies[x][y].offsetTop + enemyHeight)
             {
-               if(bulletBuffer[_bulletIndex].offsetLeft + 20 >= enemies[x][y].offsetLeft && bulletBuffer[_bulletIndex].offsetLeft <= enemies[x][y].offsetLeft + 50)
+               if(bulletBuffer[_bulletIndex].offsetLeft + bulletWidth >= enemies[x][y].offsetLeft && bulletBuffer[_bulletIndex].offsetLeft <= enemies[x][y].offsetLeft + enemyWidth)
                {
                   bulletBuffer[_bulletIndex].remove();
                   bulletBuffer[_bulletIndex] = null;
