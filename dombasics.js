@@ -32,6 +32,9 @@ shootControlButton.addEventListener("touchend", function(event){
    }
    
 });
+
+var bottomGameScreenMobile = 125;
+var bottomGameScreen = 0;
 var controlsImage = null;
 
 var touchControlWidth = 50;
@@ -55,17 +58,19 @@ function OnLoad()
 
       screenStopBuffer = screenStopBuffer / 3;
 
-      leftControlButton.style.bottom = '100px';
+      bottomGameScreen = bottomGameScreenMobile;
+
+      leftControlButton.style.bottom = touchControlSpacing + 'px';
       leftControlButton.style.left = window.innerWidth - (touchControlWidth + touchControlSpacing) * 2 + 'px';
 
       
 
-      rightControlButton.style.bottom = '100px';
+      rightControlButton.style.bottom = touchControlSpacing + 'px';
       rightControlButton.style.left = window.innerWidth - (touchControlWidth + touchControlSpacing) + 'px';
 
      
 
-      shootControlButton.style.bottom = '100px';
+      shootControlButton.style.bottom = touchControlSpacing + 'px';
       shootControlButton.style.left = 0 + touchControlSpacing + 'px';
    }
    else
@@ -211,7 +216,7 @@ function SpawnPlayer()
    document.body.appendChild(player);
 
    var bottom = window.innerHeight;
-   player.style.bottom = '0px';
+   player.style.bottom = bottomGameScreen + 'px';
    player.style.left = window.innerWidth / 2 - playerWidth / 2 + 'px';
    player.style.height = playerHeight+'px';
    player.style.width = playerWidth + 'px';
@@ -328,7 +333,7 @@ document.addEventListener('keyup', function(event) {
    }
 });
 
-var rightScreenStopBuffer = 20;
+var screenStopBuffer = 20;
 function Move()
 {
    if(moveDirection != 0)
@@ -438,7 +443,7 @@ function MoveEnemiesDown()
          if(enemies[x][y] != null)
          {
             enemies[x][y].style.bottom = (window.innerHeight - enemies[x][y].offsetTop) - enemyHeight * 2 + 'px';
-            if(window.innerHeight - enemies[x][y].offsetTop - 50 <= window.innerHeight - player.offsetTop)
+            if(window.innerHeight - enemies[x][y].offsetTop - enemyHeight <= window.innerHeight - (player.offsetTop + bottomGameScreen))
             {
                console.log("Lose");
                StopGame();
@@ -462,12 +467,12 @@ function SpawnBullet()
       if(bulletBuffer[x] == null)
       {
          bulletBuffer[x] = para;
-         bulletBuffer[x].style.bottom = '0px';
+         //bulletBuffer[x].style.bottom = bottomGameScreen + playerHeight + 'px';
          bulletBuffer[x].style.left = '0px';
          bulletBuffer[x].style.height = bulletheight + 'px';
          bulletBuffer[x].style.width = bulletWidth + 'px';
          //bulletBuffer[x].style.backgroundColor = "#88FB45";
-         bulletBuffer[x].style.bottom = playerHeight + 'px';
+         bulletBuffer[x].style.bottom = bottomGameScreen + playerHeight + 'px';
 
          bulletBuffer[x].style.left = player.offsetLeft + playerWidth / 2 - bulletWidth / 2 + 'px';
 
