@@ -33,13 +33,13 @@ shootControlButton.addEventListener("touchend", function(event){
    
 });
 
-var bottomGameScreenMobile = 125;
+var bottomGameScreenMobile = 250;
 var bottomGameScreen = 0;
 var controlsImage = null;
 
-var touchControlWidth = 50;
-var touchControlHeight = 50;
-var touchControlSpacing = 30;
+var touchControlWidth = 90;
+var touchControlHeight = 90;
+var touchControlSpacing = 20;
 function OnLoad()
 {
    console.log(window.innerWidth);
@@ -62,16 +62,20 @@ function OnLoad()
 
       leftControlButton.style.bottom = touchControlSpacing + 'px';
       leftControlButton.style.left = window.innerWidth - (touchControlWidth + touchControlSpacing) * 2 + 'px';
-
+      leftControlButton.style.width = touchControlWidth + 'px';
+      leftControlButton.style.height = touchControlHeight +'px';
       
 
       rightControlButton.style.bottom = touchControlSpacing + 'px';
       rightControlButton.style.left = window.innerWidth - (touchControlWidth + touchControlSpacing) + 'px';
-
+      rightControlButton.style.width = touchControlWidth + 'px';
+      rightControlButton.style.height = touchControlHeight +'px';
      
 
       shootControlButton.style.bottom = touchControlSpacing + 'px';
       shootControlButton.style.left = 0 + touchControlSpacing + 'px';
+      shootControlButton.style.width = touchControlWidth + 'px';
+      shootControlButton.style.height = touchControlHeight +'px';
    }
    else
    {

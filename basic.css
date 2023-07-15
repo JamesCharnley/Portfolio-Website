@@ -112,14 +112,20 @@ body{
     #left-control{
         position: absolute;
         background-color: transparent;
+        border-color: transparent;
     }
     #right-control{
         position: absolute;
         background-color: transparent;
+        border-color: transparent;
     }
     #shoot-control{
         position: absolute;
         background-color: transparent;
+    }
+    .control-image{
+        width: 100%;
+        height: 100%;
     }
 }
 
