@@ -11,9 +11,10 @@ var controlsImage = null;
 var touchControlWidth = 90;
 var touchControlHeight = 90;
 var touchControlSpacing = 20;
+var touchControlBottom = 100;
 
 // game screen values
-var bottomGameScreenMobile = 250;
+var bottomGameScreenMobile = 300;
 var bottomGameScreen = 0;
 var screenStopBuffer = 20;
 
@@ -103,22 +104,22 @@ function OnLoad()
       screenStopBuffer = screenStopBuffer / 3;
 
       bottomGameScreen = bottomGameScreenMobile;
-      gameLine.style.bottom = bottomGameScreenMobile + 'px';
+      gameLine.style.bottom = bottomGameScreenMobile - 2 + 'px';
 
-      leftControlButton.style.bottom = touchControlSpacing + 'px';
+      leftControlButton.style.bottom = touchControlBottom + 'px';
       leftControlButton.style.left = window.innerWidth - (touchControlWidth + touchControlSpacing) * 2 + 'px';
       leftControlButton.style.width = touchControlWidth + 'px';
       leftControlButton.style.height = touchControlHeight +'px';
       
 
-      rightControlButton.style.bottom = touchControlSpacing + 'px';
+      rightControlButton.style.bottom = touchControlBottom + 'px';
       rightControlButton.style.left = window.innerWidth - (touchControlWidth + touchControlSpacing) + 'px';
       rightControlButton.style.width = touchControlWidth + 'px';
       rightControlButton.style.height = touchControlHeight +'px';
      
 
-      shootControlButton.style.bottom = touchControlSpacing + 'px';
-      shootControlButton.style.left = 0 + touchControlSpacing + 'px';
+      shootControlButton.style.bottom = touchControlBottom + 'px';
+      shootControlButton.style.left = touchControlSpacing + 'px';
       shootControlButton.style.width = touchControlWidth + 'px';
       shootControlButton.style.height = touchControlHeight +'px';
    }
