@@ -1,10 +1,60 @@
-window.addEventListener("load", OnLoad);
+// html elements
+var leftControlButton = document.getElementById('left-control'); 
+var rightControlButton = document.getElementById('right-control');
+var shootControlButton = document.getElementById('shoot-control');
 
 var startBtn = document.getElementById('start-button');
-startBtn.addEventListener("click", StartGame)
+var gameLine = document.getElementById('game-line');
+var controlsImage = null;
 
-var leftControlButton = document.getElementById('left-control');
-leftControlButton.addEventListener("touchend", ResetMoveDirection);
+// touch control values
+var touchControlWidth = 90;
+var touchControlHeight = 90;
+var touchControlSpacing = 20;
+
+// game screen values
+var bottomGameScreenMobile = 250;
+var bottomGameScreen = 0;
+var screenStopBuffer = 20;
+
+// enemy values
+var enemiesMoveInterval = null;
+var enemiesMoveIntervalValue = 300;
+var enemyWidth = 50;
+var enemyHeight = 50;
+var enemySpacingHorizontal = 20;
+var enemySpacingVertical = 10;
+var enemySprites = ["SIB.png", "SIR.png", "SIG.png"];
+var enemies = [[12], [12], [12], [12], [12], [12]];
+var increaseSpeed = false;
+
+// player values
+var player = null;
+var playerWidth = 100;
+var playerHeight = 50;
+var isShooting = false;
+var moveDirection = 0;
+var speed = 2;
+var interval = null;
+
+// bullet values
+var bulletWidth = 20;
+var bulletheight = 20;
+var bulletMoveInterval = null;
+var shootInterval = null;
+var bulletSpeed = 1;
+var bulletBuffer = [20];
+
+// other
+var gameActive = false;
+
+// listeners
+window.addEventListener("load", OnLoad); // call OnLoad() when page loads
+
+startBtn.addEventListener("click", StartGame) // call StartGame() when start button is pressed
+
+
+leftControlButton.addEventListener("touchend", ResetMoveDirection); // mobile left control listeners
 leftControlButton.addEventListener("touchstart", function(event){
    if(gameActive)
    {
@@ -13,8 +63,8 @@ leftControlButton.addEventListener("touchstart", function(event){
    }
    
 });
-var rightControlButton = document.getElementById('right-control');
-rightControlButton.addEventListener("touchend", ResetMoveDirection);
+
+rightControlButton.addEventListener("touchend", ResetMoveDirection); // mobile right control listeners
 rightControlButton.addEventListener("touchstart", function(event){
    if(gameActive)
    {
@@ -23,8 +73,8 @@ rightControlButton.addEventListener("touchstart", function(event){
    }
    
 });
-var shootControlButton = document.getElementById('shoot-control');
-shootControlButton.addEventListener("touchend", function(event){
+
+shootControlButton.addEventListener("touchend", function(event){ // mobile shoot control listeners
    if(gameActive)
    {
       event.preventDefault();
@@ -33,16 +83,10 @@ shootControlButton.addEventListener("touchend", function(event){
    
 });
 
-var bottomGameScreenMobile = 250;
-var bottomGameScreen = 0;
-var controlsImage = null;
 
-var touchControlWidth = 90;
-var touchControlHeight = 90;
-var touchControlSpacing = 20;
 function OnLoad()
 {
-   console.log(window.innerWidth);
+   // make changes for mobile screen size
    if(window.innerWidth < 1000)
    {
       //startBtn.remove();
@@ -59,6 +103,7 @@ function OnLoad()
       screenStopBuffer = screenStopBuffer / 3;
 
       bottomGameScreen = bottomGameScreenMobile;
+      gameLine.style.bottom = bottomGameScreenMobile + 'px';
 
       leftControlButton.style.bottom = touchControlSpacing + 'px';
       leftControlButton.style.left = window.innerWidth - (touchControlWidth + touchControlSpacing) * 2 + 'px';
@@ -77,10 +122,9 @@ function OnLoad()
       shootControlButton.style.width = touchControlWidth + 'px';
       shootControlButton.style.height = touchControlHeight +'px';
    }
-   else
+   else // not mobile
    {
-      
-   controlsImage = document.createElement("img");
+      controlsImage = document.createElement("img");
       controlsImage.setAttribute("src", "SIControls.png");
       controlsImage.style.position = 'absolute';
       document.body.appendChild(controlsImage);
@@ -94,22 +138,7 @@ function OnLoad()
    shootControlButton.style.opacity = 0;
 }
 
-var moveDirection = 0;
-var speed = 2;
-var bulletSpeed = 1;
-var interval = null;
-var enemiesMoveInterval = null;
-var enemiesMoveIntervalValue = 300;
-var bulletMoveInterval = null;
-var shootInterval = null;
-var player = null;
 
-var bulletBuffer = [20];
-var enemies = [[12], [12], [12], [12], [12], [12]];
-var isShooting = false;
-var gameActive = false;
-var increaseSpeed = false;
-var enemySprites = ["SIB.png", "SIR.png", "SIG.png"];
 function ResetMoveDirection()
 {
    moveDirection = 0;
@@ -134,6 +163,7 @@ function StartGame()
       leftControlButton.style.opacity = 1;
       rightControlButton.style.opacity = 1;
       shootControlButton.style.opacity = 1;
+      gameLine.style.opacity = 1;
    }
    document.getElementById("main").style.animation = "transition-black 3s forwards";
    document.getElementById("body").style.animation = "transition-black 3s forwards";
@@ -170,6 +200,7 @@ function StopGame()
       leftControlButton.style.opacity = 0;
       rightControlButton.style.opacity = 0;
       shootControlButton.style.opacity = 0;
+      gameLine.style.opacity = 0;
    }
    document.getElementById("main").style.animation = "transition-black-back 3s forwards";
    document.getElementById("body").style.animation = "transition-black-back 3s forwards";
@@ -209,8 +240,7 @@ function StopGame()
 
    startBtn.innerHTML = "Play";
 }
-var playerWidth = 100;
-var playerHeight = 50;
+
 function SpawnPlayer()
 {
    
@@ -227,10 +257,7 @@ function SpawnPlayer()
    //player.style.backgroundColor = "#2E71F9";
   
 }
-var enemyWidth = 50;
-var enemyHeight = 50;
-var enemySpacingHorizontal = 20;
-var enemySpacingVertical = 10;
+
 function SpawnEnemies()
 {
    var horizontalStart = window.innerWidth / 2 - (((enemyWidth + enemySpacingHorizontal) * 12) / 2);
@@ -245,12 +272,7 @@ function SpawnEnemies()
       {
          var para = document.createElement("img");
          para.setAttribute("src", enemySprites[spriteIndex]);
-         //elem.setAttribute("height", "768");
-         //elem.setAttribute("width", "1024");
-         //elem.setAttribute("alt", "Flower");
-         //document.getElementById("placehere").appendChild("elem");
 
-         //const para = document.createElement("div");
          para.style.position = 'absolute';
          document.body.appendChild(para);
          enemies[x][y] = para;
@@ -277,10 +299,9 @@ document.addEventListener('keydown', function(event) {
    if (event.key == 'ArrowLeft') {
       if(gameActive)
       {
-         event.preventDefault(); // prevent it from doing default behavior, like downarrow moving page downward
+         event.preventDefault();
          if(player.offsetLeft > 1)
          {
-         //player.style.left = player.offsetLeft - 3 + 'px';
          moveDirection = -1;
          }
       }
@@ -289,10 +310,9 @@ document.addEventListener('keydown', function(event) {
    if (event.key == 'ArrowRight') {
       if(gameActive)
       {
-         event.preventDefault(); // prevent it from doing default behavior, like downarrow moving page downward
+         event.preventDefault();
          if(player.offsetLeft < window.innerWidth - 120)
          {
-            //player.style.left = player.offsetLeft + 3 + 'px';
             moveDirection = 1;
          }
       }
@@ -320,11 +340,11 @@ function Shoot()
 }
 document.addEventListener('keyup', function(event) {
    if (event.key == 'ArrowLeft') {
-      event.preventDefault(); // prevent it from doing default behavior, like downarrow moving page downward
+      event.preventDefault();
       moveDirection = 0;
    }
    if (event.key == 'ArrowRight') {
-      //event.preventDefault(); // prevent it from doing default behavior, like downarrow moving page downward
+      event.preventDefault();
       moveDirection = 0;
       
    }
@@ -337,7 +357,7 @@ document.addEventListener('keyup', function(event) {
    }
 });
 
-var screenStopBuffer = 20;
+
 function Move()
 {
    if(moveDirection != 0)
@@ -457,8 +477,7 @@ function MoveEnemiesDown()
       }
    }
 }
-var bulletWidth = 20;
-var bulletheight = 20;
+
 function SpawnBullet()
 {
    shootInterval = setInterval(UnlockShooting, 500);
