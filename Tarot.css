@@ -21,15 +21,12 @@ nav ul {
     font-size: large;
 }
 
-li {
+nav ul li {
     display: list-item;
     margin-left: 20px;
     margin-top: auto;
     margin-bottom: auto;
     background-color: black;
-}
-
-nav ul li {
     background-color: black;
 }
 nav ul li a {
@@ -42,52 +39,50 @@ nav ul li a img{
     background-color: black;
 }
 #main{
-	width: 100%;
-	height: 100%;
-	background-color: #1A1919;
+    width: 100%;
+    height: 100%;
+    background-color: #1A1919;
 }
 #list{
-	width: 50%;
-	height: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 0;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top: 10px;
-	background-color: #0F0E0E;
+    width: 75%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    background-color: #0F0E0E;
 }
-.card{
-	width: 95%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 10px;
-	background-color: black;
-	border-style: solid;
-	border-color: whitesmoke;
-	border-radius: 5px;
+.main-image{
+    width: 100%;
+    height: auto;
+}
 
+#title{
+    color: ghostwhite;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: xx-large;
 }
-.card-image{
-	width: 100%;
-	height: auto;
+iframe{
+    aspect-ratio: 16/9;
+    width: 100%;
 }
-.card-content{
-	padding-left: 3%;
-	padding-right: 3%;
-	padding-bottom: 10px;
-	width: 94%;
-	background-color: transparent;
+p{
+    color: ghostwhite;
 }
-.card-title{
-	color: whitesmoke;
+h3{
+    color: ghostwhite;
 }
-.card-description{
-	color: whitesmoke;
+li{
+    color: ghostwhite;
 }
-.card-skills{
-	color: whitesmoke;
-}
+
 .button-container{
     width: 50%;
     margin-left: auto;
@@ -101,13 +96,13 @@ a.button {
     appearance: button;
     background-color: transparent;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 30px;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
     color: white;
     border-style: solid;
-    border-color: whitesmoke;
+    border-color: ghostwhite;
     border-width: 2px;
     border-radius: 5px;
 }
