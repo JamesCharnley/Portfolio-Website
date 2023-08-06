@@ -205,8 +205,33 @@ nav ul li {
   border-right: .15em solid ghostwhite;
   border-color: transparent;
   width: 0;
-  animation: typing 1.5s steps(20, end) forwards, blink .8s infinite;
+  animation: typing 1.0s steps(20, end) forwards, blink .8s infinite;
   animation-delay: 1.5s;
+}
+
+.button-container{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    border-style: solid;
+    border-color: ghostwhite;
+    border-width: 2px;
+    border-radius: 5px;
 }
 
 @keyframes typing {
